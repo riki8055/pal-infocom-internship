@@ -47,8 +47,95 @@ nav .btns-wrapper .btn:hover {
 .section-1 h1 {
   color: var(--Neutral-Color-Gray-950);
 }
-.section-1 p {
+.section-1 p,
+.section-2 .section-2-content p {
   color: var(--Neutral-Color-Gray-500);
   width: 450px;
 }
 /* End of Section 1 */
+
+/* Section 2 */
+/* .section-2 {
+  padding: 70px 0;
+} */
+.section-2 .shortner {
+  height: 150px;
+  background-color: var(--Primary-Color-Purple-950);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+  border-radius: 10px;
+  gap: 20px;
+  background: url("../images/bg-shorten-desktop.svg")
+    var(--Primary-Color-Purple-950);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-2 .shortner .btn {
+  width: 170px;
+}
+
+.section-2 .cards {
+  height: 350px;
+  position: relative;
+}
+
+.section-2 .cards::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 10px;
+  background-color: var(--Primary-Color-Blue-400);
+}
+
+.section-2 .cards .connect-line {
+  width: 80%;
+  height: 10px;
+  background-color: var(--Primary-Color-Blue-400);
+  position: absolute;
+  transform: translate(50%);
+}
+
+.section-2 .cards > div {
+  height: 80%;
+}
+
+.section-2 .cards > div:nth-child(1) {
+  align-self: flex-start;
+}
+
+.section-2 .cards > div:nth-child(3) {
+  align-self: flex-end;
+}
+
+.section-2 .cards .card {
+  height: 100%;
+  border: 0;
+  background-color: #f8f9fa;
+  box-shadow: 1px 2px 2px #ccc;
+}
+
+.section-2 .cards .img-wrapper {
+  background-color: var(--Primary-Color-Purple-950);
+  width: 80px;
+  height: 80px;
+  margin-top: -40px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.section-2 .cards .card-title {
+  color: var(--Neutral-Color-Gray-950);
+  margin-bottom: 15px;
+}
+.section-2 .cards p {
+  color: var(--Neutral-Color-Gray-500);
+  line-height: 2;
+}
+/* End of Section 2 */
