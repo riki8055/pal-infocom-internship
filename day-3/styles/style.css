@@ -25,3 +25,20 @@ body {
   font-style: normal;
 }
 /* End of Resets & Commons */
+
+/* Nav */
+nav .btns-wrapper .btn:hover {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.btn-signup {
+  background-color: var(--Primary-Color-Blue-400);
+  color: #fff;
+}
+
+.btn-signup:hover {
+  background-color: var(--Primary-Color-Blue-400);
+  color: #fff;
+}
+/* End of Nav */
