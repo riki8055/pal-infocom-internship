@@ -335,6 +335,184 @@ footer {
 /* End of Footer */
 
 /* Responsives */
-@media (max-width: 1350px) {
+@media (max-width: 1370px) {
+  .nav-link {
+    margin-right: 3rem;
+  }
+  .section-2 .content {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1270px) {
+  nav .logo .lead {
+    font-size: 1.4rem;
+  }
+
+  nav .logo img {
+    width: 14rem;
+  }
+
+  .nav-link {
+    margin-right: 2rem;
+  }
+
+  .nav-link,
+  .social-link {
+    font-size: 1.5rem;
+  }
+
+  .section-1 .content {
+    width: 50rem;
+  }
+
+  .section-1 .content h2 {
+    font-size: 3.5rem;
+  }
+
+  .section-1 .content p {
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-1 .bg-hero {
+    width: 45rem;
+  }
+
+  .section-2 .content {
+    width: 45%;
+  }
+
+  .caps-card {
+    width: 45rem;
+    /* padding: 4rem; */
+  }
+
+  .caps-card .cards {
+    gap: 2.5rem;
+  }
+
+  .caps-card .card {
+    width: 16rem;
+  }
+}
+
+@media (max-width: 1130px) {
+  .pad {
+    padding: 3rem 10rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .pad {
+    padding: 3rem 8rem;
+  }
+  .nav-links,
+  .social-links,
+  .pal-infocom-logo {
+    display: none;
+  }
+
+  .section-1 .content {
+    width: 40rem;
+  }
+
+  .section-1 .content h2 {
+    font-size: 3rem;
+  }
+
+  .section-1 .content p {
+    font-size: 1.4rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-1 .content .btn {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.4rem;
+  }
+
+  .section-1 .bg-hero {
+    width: 40rem;
+  }
+
+  .caps-card {
+    width: 40rem;
+    padding: 4rem;
+  }
+
+  .caps-card .card {
+    width: 14rem;
+  }
+
+  footer {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .section-1,
+  .section-2 {
+    flex-direction: column;
+  }
+
+  .section-1 .content,
+  .section-2 .content {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+
+  .section-1 .content,
+  .section-2 .content {
+    text-align: center;
+    padding: 0 6rem;
+  }
+
+  .section-1 .content h2 {
+    line-height: 1.6;
+    font-size: 2.5rem;
+  }
+
+  .section-2 .divider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .pad {
+    padding: 2rem 5rem;
+  }
+
+  nav .logo .lead {
+    display: none;
+  }
+
+  .section-1 .content,
+  .section-2 .content {
+    padding: 0 4rem;
+  }
+
+  .section-2 .caps-card .card {
+    width: 100%;
+  }
+
+  footer {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .pad {
+    padding: 2rem;
+  }
+
+  .section-1 .content,
+  .section-2 .content {
+    padding: 0 2rem;
+  }
+
+  .section-1 .bg-hero,
+  .section-2 .caps-card {
+    width: 100%;
+  }
 }
 /* End of Responsives */
