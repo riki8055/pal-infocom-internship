@@ -1,0 +1,27 @@
+:root {
+  --Primary-Color-Blue-400: hsl(180, 66%, 49%);
+  --Primary-Color-Purple-950: hsl(257, 27%, 26%);
+  --Secondary-Color-Red-400: hsl(0, 87%, 67%);
+  --Neutral-Color-Gray-400: hsl(0, 0%, 75%);
+  --Neutral-Color-Gray-500: hsl(257, 7%, 63%);
+  --Neutral-Color-Gray-900: hsl(255, 11%, 22%);
+  --Neutral-Color-Gray-950: hsl(260, 8%, 14%);
+}
+
+/* Resets & Commons */
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+/* End of Resets & Commons */
