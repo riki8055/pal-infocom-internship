@@ -42,3 +42,13 @@ nav .btns-wrapper .btn:hover {
   color: #fff;
 }
 /* End of Nav */
+
+/* Section 1 */
+.section-1 h1 {
+  color: var(--Neutral-Color-Gray-950);
+}
+.section-1 p {
+  color: var(--Neutral-Color-Gray-500);
+  width: 450px;
+}
+/* End of Section 1 */
