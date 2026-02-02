@@ -55,9 +55,9 @@ nav .btns-wrapper .btn:hover {
 /* End of Section 1 */
 
 /* Section 2 */
-/* .section-2 {
-  padding: 70px 0;
-} */
+.section-2 {
+  background-color: #f8f9fa;
+}
 .section-2 .shortner {
   height: 150px;
   background-color: var(--Primary-Color-Purple-950);
@@ -117,7 +117,7 @@ nav .btns-wrapper .btn:hover {
 .section-2 .cards .card {
   height: 100%;
   border: 0;
-  background-color: #f8f9fa;
+  background-color: #fff;
   box-shadow: 1px 2px 2px #ccc;
 }
 
@@ -139,3 +139,18 @@ nav .btns-wrapper .btn:hover {
   line-height: 2;
 }
 /* End of Section 2 */
+
+/* Section 3 */
+.section-3 {
+  background-color: var(--Primary-Color-Purple-950);
+  background: url("../images/bg-shorten-desktop.svg")
+    var(--Primary-Color-Purple-950);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-3 h4 {
+  color: #f8f9fa;
+}
+/* End of Section 3 */
