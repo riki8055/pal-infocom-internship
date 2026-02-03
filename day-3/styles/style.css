@@ -234,7 +234,7 @@ footer .social footer ul {
     top: 50%;
     left: 12%;
     transform: translateX(-50%) rotate(90deg);
-    width: 100%;
+    width: 80vh;
     height: 10px;
     background-color: var(--Primary-Color-Blue-400);
   }
