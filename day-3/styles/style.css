@@ -73,6 +73,23 @@ body {
   width: 170px;
 }
 
+.section-2 .shorten-links {
+  margin-top: 25px;
+}
+
+.section-2 .shorten-links li {
+  background-color: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.section-2 .shorten-links .created-link {
+  text-decoration: none;
+  color: var(--Primary-Color-Blue-400);
+  margin-right: 25px;
+}
+
 .section-2 .cards {
   height: 350px;
   position: relative;
