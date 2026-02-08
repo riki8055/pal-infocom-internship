@@ -79,8 +79,15 @@ body {
 }
 
 .section-2 .shortner input + .error {
+  opacity: 0;
+  visibility: hidden;
   color: var(--Secondary-Color-Red-400);
   font-style: italic;
+}
+
+.section-2 .shortner input.invalid + .error {
+  opacity: 1;
+  visibility: visible;
 }
 
 .section-2 .shortner .btn {
