@@ -54,7 +54,7 @@ body {
   background-color: #f8f9fa;
 }
 .section-2 .shortner {
-  height: 150px;
+  /* height: 150px; */
   background-color: var(--Primary-Color-Purple-950);
   display: flex;
   justify-content: center;
@@ -67,6 +67,20 @@ body {
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.section-2 .shortner input.invalid {
+  border: 2px solid var(--Secondary-Color-Red-400);
+}
+
+.section-2 .shortner input.invalid::placeholder {
+  color: var(--Secondary-Color-Red-400);
+  opacity: 0.75;
+}
+
+.section-2 .shortner input + .error {
+  color: var(--Secondary-Color-Red-400);
+  font-style: italic;
 }
 
 .section-2 .shortner .btn {

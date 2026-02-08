@@ -115,14 +115,21 @@
 
     <!-- Section 2 -->
     <section class="section-2 w-100 py-5">
-      <form class="shortner container shadow">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Shorten a link here..."
-          aria-label="Shorten a link here"
-          aria-describedby="basic-addon1"
-        />
+      <form
+        class="shortner container shadow py-5 d-flex justify-content-center align-items-start"
+      >
+        <div class="w-100">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Shorten a link here..."
+            aria-label="Shorten a link here"
+            aria-describedby="basic-addon1"
+            id="link"
+            name="link"
+          />
+          <small class="error" aria-live="polite"></small>
+        </div>
         <button type="submit" class="btn btn-main btn-signup px-4">
           Shorten it!
         </button>
