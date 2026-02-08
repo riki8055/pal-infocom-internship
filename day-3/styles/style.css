@@ -223,6 +223,23 @@ footer .socials {
     width: 100%;
   }
 
+  .section-2 .shorten-links li {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .section-2 .shorten-links .right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .section-2 .shorten-links .left,
+  .section-2 .shorten-links .right {
+    width: 100%;
+  }
+
   .section-2 .cards {
     width: 100%;
     height: auto;
