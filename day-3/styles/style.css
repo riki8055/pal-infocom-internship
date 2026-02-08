@@ -24,24 +24,19 @@ body {
   font-weight: 700;
   font-style: normal;
 }
-/* End of Resets & Commons */
 
-/* Nav */
-nav .btns-wrapper .btn:hover {
+.btn-main {
+  background-color: var(--Primary-Color-Blue-400);
+  color: #fff;
+}
+
+.btn-main:hover {
+  background-color: var(--Primary-Color-Blue-400);
+  color: #fff;
   opacity: 0.6;
   transition: opacity 0.3s ease;
 }
-
-.btn-signup {
-  background-color: var(--Primary-Color-Blue-400);
-  color: #fff;
-}
-
-.btn-signup:hover {
-  background-color: var(--Primary-Color-Blue-400);
-  color: #fff;
-}
-/* End of Nav */
+/* End of Resets & Commons */
 
 /* Section 1 */
 .section-1 h1 {
@@ -177,7 +172,7 @@ footer .social footer ul {
 /* End of Footer */
 
 /* Responsives */
-@media(max-width: 1000px) {
+@media (max-width: 1000px) {
   .section-2 .section-2-content p {
     width: 350px;
   }
@@ -224,7 +219,8 @@ footer .social footer ul {
     width: 100%;
   }
 
-  .section-2 .cards > div:nth-child(1), .section-2 .cards > div:nth-child(3) {
+  .section-2 .cards > div:nth-child(1),
+  .section-2 .cards > div:nth-child(3) {
     align-self: center;
   }
 
