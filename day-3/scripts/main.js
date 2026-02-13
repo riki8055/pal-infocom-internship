@@ -3,11 +3,13 @@ import { validateForm } from "./validation.js";
 
 dom.form.addEventListener("submit", (e) => {
   e.preventDefault();
+  clearError();
 
   const result = validateForm(dom.link.value);
 
   if (!result.isValid) {
     dom.link.classList.add("invalid");
+
     if (result.type === "emptyField") {
       dom.error.textContent = "Please add a link";
       return;
@@ -17,8 +19,10 @@ dom.form.addEventListener("submit", (e) => {
       dom.error.textContent = "Link is not valid";
       return;
     }
-  } else {
-    dom.link.classList.remove("invalid");
-    dom.error.textContent = "";
   }
 });
+
+function clearError() {
+  dom.link.classList.remove("invalid");
+  dom.error.textContent = "";
+}
