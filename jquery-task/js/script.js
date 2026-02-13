@@ -24,15 +24,56 @@ $(function () {
 });
 // End of Task #2
 
-// Task #3
+// Task #3 & 4
 $(function () {
+  let itemsArray = [];
+
   $("form").submit(function (e) {
     e.preventDefault();
 
     let inputValue = $("#itemInput").val();
-    $(".items").append($("<li>").text(inputValue));
+    itemsArray.push(inputValue);
+    renderList();
 
     $("#itemInput").val("");
   });
+
+  //   Remove last
+  $("#removeLastItemBtn").click(function () {
+    itemsArray.pop();
+    renderList();
+  });
+
+  // Render function
+  function renderList() {
+    $(".items").empty(); // Clear current list
+
+    itemsArray.forEach(function (item) {
+      $(".items").append($("<li>").text(item));
+    });
+  }
 });
-// End of Task #3
+// End of Task #3 & 4
+
+// Task #5
+$(function () {
+  const maxChars = 140;
+
+  $("#textInput").keyup(function () {
+    const currentLen = $(this).val().length;
+    const remaining = maxChars - currentLen;
+
+    $("#counter").text(remaining + " characters remaining");
+  });
+  //   End of Task #5
+
+  //   Task #6
+  $(function () {
+    $("h4").click(function () {
+      $(".accordion p").slideUp(); // slide up all paras
+
+      $(this).next("p").slideDown(); // slide down clicked heading's para
+    });
+  });
+  //   End of Task #6
+});
