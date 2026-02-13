@@ -5,7 +5,8 @@ dom.form.addEventListener("submit", (e) => {
   e.preventDefault();
   clearError();
 
-  const result = validateForm(dom.link.value);
+  const actualLink = dom.link.value;
+  const result = validateForm(actualLink);
 
   if (!result.isValid) {
     dom.link.classList.add("invalid");
