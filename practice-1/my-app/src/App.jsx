@@ -1,61 +1,33 @@
-import { useState } from "react";
-import "./App.css";
- 
-function App() {
- 
-  // 1️⃣ Number State
-  const [count, setCount] = useState(0);
- 
-  // 2️⃣ String State
-  const [name, setName] = useState("");
- 
-  // 3️⃣ Boolean State
-  const [isVisible, setIsVisible] = useState(true);
- 
+import React from "react";
+function Car({ brand, model, color, year, ...rest }) {
+  // Event function
+  const showDetails = (message) => {
+    alert(message);
+  };
   return (
-<div style={{ padding: "40px", fontFamily: "Arial" }}>
-<h1>Understanding useState</h1>
- 
-      {/* ---------------- Counter Example ---------------- */}
-<h2>1️⃣ Counter Example</h2>
- 
-      <p>Count: {count}</p>
- 
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-<button onClick={() => setCount(count - 1)} style={{ marginLeft: "10px" }}>
-        Decrease
-</button>
-<button onClick={() => setCount(0)} style={{ marginLeft: "10px" }}>
-        Reset
-</button>
- 
-      <hr />
- 
-      {/* ---------------- Input Example ---------------- */}
-<h2>2️⃣ Input Example</h2>
- 
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
- 
-      <p>Hello, {name || "Guest"} 👋</p>
- 
-      <hr />
- 
-      {/* ---------------- Toggle Example ---------------- */}
-<h2>3️⃣ Toggle Example</h2>
- 
-      <button onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? "Hide Message" : "Show Message"}
-</button>
- 
-      {isVisible && <p>This message is visible 👀</p>}
- 
+    <div>
+           {" "}
+      <h2>
+                My {color} {brand} {model} ({year})      {" "}
+      </h2>
+              {/* Accessing extra props using rest operator */}
+            <p>Extra Info: {rest.owner}</p>        {/* Normal click event */}
+           {" "}
+      <button onClick={() => alert("Car Started!")}>
+                Start Car      {" "}
+      </button>
+              {/* Passing argument in event */}
+           {" "}
+      <button onClick={() => showDetails("This is my favorite car!")}>
+                Show Message      {" "}
+      </button>
+         {" "}
     </div>
   );
 }
- 
-export default App;
+
+export default function App() {
+  return (
+    <Car brand="Ford" model="Mustang" color="Red" year={1969} owner="Deepak" />
+  );
+}
