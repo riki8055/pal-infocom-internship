@@ -1,33 +1,53 @@
-import React from "react";
-function Car({ brand, model, color, year, ...rest }) {
-  // Event function
-  const showDetails = (message) => {
-    alert(message);
-  };
+import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [cars, setCars] = useState(["Ford", "BMW", "Audi"]);
+
+  // Handle input change
+  function handleChange(e) {
+    setName(e.target.value);
+  }
+
+  // Handle form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (name.trim() === "") return;
+
+    // Add new car to list
+    setCars([...cars, name]);
+    setName("");
+  }
+
   return (
-    <div>
-           {" "}
-      <h2>
-                My {color} {brand} {model} ({year})      {" "}
-      </h2>
-              {/* Accessing extra props using rest operator */}
-            <p>Extra Info: {rest.owner}</p>        {/* Normal click event */}
-           {" "}
-      <button onClick={() => alert("Car Started!")}>
-                Start Car      {" "}
-      </button>
-              {/* Passing argument in event */}
-           {" "}
-      <button onClick={() => showDetails("This is my favorite car!")}>
-                Show Message      {" "}
-      </button>
-         {" "}
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h1>My Cars</h1>
+
+      {/* Car List */}
+      <ul>
+        {cars.map((car, index) => (
+          <li key={index}>I am a {car}</li>
+        ))}
+      </ul>
+
+      {/* Form */}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Add a new car:
+          <input
+            type="text"
+            value={name}
+            onChange={handleChange}
+            style={{ marginLeft: "10px" }}
+          />
+        </label>
+        <button type="submit" style={{ marginLeft: "10px" }}>
+          Add
+        </button>
+      </form>
     </div>
   );
 }
 
-export default function App() {
-  return (
-    <Car brand="Ford" model="Mustang" color="Red" year={1969} owner="Deepak" />
-  );
-}
+export default App
