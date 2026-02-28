@@ -1,4 +1,5 @@
 import TodoFormInput from "./TodoFormInput";
+import Button from "../UI/Button";
 
 export default function TodoForm() {
   console.log("- TodoForm rendered");
@@ -16,9 +17,9 @@ export default function TodoForm() {
         type="checkbox"
         id="todoPriority"
       />
-      <button type="submit" className="btn btn-success" id="submitBtn">
+      <Button type="submit" variant="success" id="submitBtn">
         Add ToDo
-      </button>
+      </Button>
     </form>
   );
 }
