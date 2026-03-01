@@ -33,7 +33,12 @@ function App() {
 
     console.log(formData);
 
-    setTodos((prev) => [...prev, formData]);
+    setTodos((prev) => {
+      if (formData.todoPriority) {
+        return [formData, ...prev];
+      }
+      return [...prev, formData];
+    });
     setFormData(initialFormValue);
   }
 
