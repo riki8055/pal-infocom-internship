@@ -18,6 +18,10 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState(initialFormValue);
 
+  function handleClearCompleted() {
+    setTodos((prev) => prev.filter((t) => !t.completed));
+  }
+
   function handleTodoClick(index) {
     setTodos((prev) =>
       prev.map((t, i) => (i === index ? { ...t, completed: !t.completed } : t)),
@@ -68,6 +72,7 @@ function App() {
               className="me-2"
               variant="secondary"
               id="clearCompletedBtn"
+              onClick={handleClearCompleted}
             >
               Clear Completed
             </Button>
