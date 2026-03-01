@@ -30,6 +30,10 @@ function App() {
     setTodos((prev) => prev.filter((t) => !t.todoPriority));
   }
 
+  function handlePopOutLast() {
+    setTodos((prev) => prev.slice(0, -1));
+  }
+
   function handleTodoClick(index) {
     setTodos((prev) =>
       prev.map((t, i) => (i === index ? { ...t, completed: !t.completed } : t)),
@@ -109,6 +113,7 @@ function App() {
               <DropDownBtns
                 todos={todos}
                 onRemovePriority={handleRemovePriority}
+                onPopOutLast={handlePopOutLast}
               />
             </div>
           </div>

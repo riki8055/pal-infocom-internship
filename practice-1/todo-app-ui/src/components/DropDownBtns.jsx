@@ -1,4 +1,8 @@
-export default function DropDownBtns({ todos, onRemovePriority }) {
+export default function DropDownBtns({
+  todos,
+  onRemovePriority,
+  onPopOutLast,
+}) {
   console.log("- DropDownBtnsRendered");
 
   const dropDownActions = [
@@ -7,7 +11,7 @@ export default function DropDownBtns({ todos, onRemovePriority }) {
       label: "Remove ToDo at priority",
       onClick: onRemovePriority,
     },
-    { id: "popOutBtn", label: "Pop out last ToDo" },
+    { id: "popOutBtn", label: "Pop out last ToDo", onClick: onPopOutLast },
     { id: "clearRangeBtn", label: "Delete ToDo in a range" },
   ];
 
