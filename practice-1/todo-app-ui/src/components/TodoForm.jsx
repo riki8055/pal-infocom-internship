@@ -1,13 +1,6 @@
 import { useState } from "react";
 import TodoFormInput from "./TodoFormInput";
 import Button from "../UI/Button";
-import { createTodoStore } from "../utils/TodoStore";
-
-// create a single store instance at module scope so it isn't
-// recreated on every render.  previously the call lived inside the
-// component, which meant a fresh empty `todos` array each time the
-// form rendered and therefore nothing accumulated.
-const todoStore = createTodoStore();
 
 export default function TodoForm() {
   console.log("- TodoForm rendered");
@@ -33,7 +26,8 @@ export default function TodoForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    todoStore.add(todo);
+    console.log(todo);
+
     setTodo(initialValue);
   }
 
