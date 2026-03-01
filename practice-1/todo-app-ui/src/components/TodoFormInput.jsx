@@ -4,7 +4,12 @@ export default function TodoFormInput({ label, ...props }) {
   if (props.type === "checkbox") {
     return (
       <div className="mb-3">
-        <input type={props.type} id={props.id} />
+        <input
+          type={props.type}
+          id={props.id}
+          name={props.name}
+          onChange={props.onChange}
+        />
         <label htmlFor={props.id}>Make it priority</label>
       </div>
     );
@@ -14,7 +19,13 @@ export default function TodoFormInput({ label, ...props }) {
         <label htmlFor={props.id} className={props.className}>
           {label}
         </label>
-        <input type={props.type} id={props.id} className="form-control" />
+        <input
+          type={props.type}
+          id={props.id}
+          name={props.name}
+          className="form-control"
+          onChange={props.onChange}
+        />
       </div>
     );
   }
