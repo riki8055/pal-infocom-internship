@@ -1,38 +1,11 @@
-import { useState } from "react";
 import TodoFormInput from "./TodoFormInput";
 import Button from "../UI/Button";
 
-export default function TodoForm() {
+export default function TodoForm({ todo, onInputChange, onSubmit }) {
   console.log("- TodoForm rendered");
 
-  const initialValue = {
-    todoInput: "",
-    todoPriority: null,
-  };
-
-  const [todo, setTodo] = useState(initialValue);
-
-  function handleInputChange(e) {
-    const target = e.target;
-    const name = target.name;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-
-    setTodo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    console.log(todo);
-
-    setTodo(initialValue);
-  }
-
   return (
-    <form id="form" onSubmit={handleSubmit}>
+    <form id="form" onSubmit={onSubmit}>
       <TodoFormInput
         label="Add a ToDo"
         type="text"
@@ -40,7 +13,7 @@ export default function TodoForm() {
         name="todoInput"
         className="form-label"
         value={todo.todoInput}
-        onChange={handleInputChange}
+        onChange={onInputChange}
       />
       <TodoFormInput
         label="Make it priority"
@@ -48,7 +21,7 @@ export default function TodoForm() {
         id="todoPriority"
         name="todoPriority"
         checked={!!todo.todoPriority}
-        onChange={handleInputChange}
+        onChange={onInputChange}
       />
       <Button type="submit" variant="success" id="submitBtn">
         Add ToDo

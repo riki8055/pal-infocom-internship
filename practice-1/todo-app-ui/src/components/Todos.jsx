@@ -1,11 +1,11 @@
-export default function Todos() {
+export default function Todos({ todos }) {
   console.log("- Todos rendered");
 
   return (
     <ul class="list-group list-group-flush" id="todoList">
-      <li>Todo 1</li>
-      <li>Todo 2</li>
-      <li>Todo 3</li>
+      {todos.map((todo, index) => (
+        <li key={index}>{todo.todoInput}</li>
+      ))}
     </ul>
   );
 }

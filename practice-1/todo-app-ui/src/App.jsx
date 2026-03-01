@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 import TodoForm from "./components/TodoForm";
 import Button from "./UI/Button";
@@ -8,13 +9,45 @@ import Todos from "./components/Todos";
 function App() {
   console.log("App rendered");
 
+  const initialFormValue = {
+    todoInput: "",
+    todoPriority: null,
+  };
+
+  const [todos, setTodos] = useState([]);
+  const [formData, setFormData] = useState(initialFormValue);
+
+  function handleInputChange(e) {
+    const target = e.target;
+    const name = target.name;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log(formData);
+
+    setTodos((prev) => [...prev, formData]);
+    setFormData(initialFormValue);
+  }
+
   return (
     <div className="container">
       <div class="card my-3">
         <div class="card-body">
-          <TodoForm />
+          <TodoForm
+            todo={formData}
+            onInputChange={handleInputChange}
+            onSubmit={handleSubmit}
+          />
         </div>
-        <Todos />
+        <Todos todos={todos} />
         <div class="card-body">
           <div class="info"></div>
           <div class="btns d-flex">
