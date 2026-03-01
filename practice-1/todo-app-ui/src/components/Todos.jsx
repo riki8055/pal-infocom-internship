@@ -1,4 +1,6 @@
 export default function Todos() {
+  console.log("- Todos rendered");
+
   return (
     <ul class="list-group list-group-flush" id="todoList">
       <li>Todo 1</li>
