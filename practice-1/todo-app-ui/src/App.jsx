@@ -3,6 +3,7 @@ import "./App.css";
 import TodoForm from "./components/TodoForm";
 import Button from "./UI/Button";
 import DropDownBtns from "./components/DropDownBtns";
+import Todos from "./components/Todos";
 
 function App() {
   console.log("App rendered");
@@ -13,7 +14,7 @@ function App() {
         <div class="card-body">
           <TodoForm />
         </div>
-        <ul class="list-group list-group-flush" id="todoList"></ul>
+        <Todos />
         <div class="card-body">
           <div class="info"></div>
           <div class="btns d-flex">

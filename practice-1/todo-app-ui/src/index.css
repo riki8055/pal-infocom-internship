@@ -1,0 +1,28 @@
+li {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+li.completed {
+  text-decoration: line-through;
+}
+.card {
+  width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+  .card {
+    width: 100%;
+  }
+
+  .btns {
+    flex-direction: column;
+  }
+
+  .btns .btn {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
