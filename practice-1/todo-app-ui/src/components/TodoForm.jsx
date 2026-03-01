@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 export default function TodoForm() {
   console.log("- TodoForm rendered");
 
-  const [todos, setTodos] = useState({
+  const [todo, setTodo] = useState({
     todoInput: "",
     todoPriority: null,
   });
@@ -16,7 +16,7 @@ export default function TodoForm() {
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
-    setTodos((prev) => ({
+    setTodo((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -25,11 +25,11 @@ export default function TodoForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(todos);
+    console.log(todo);
   }
 
   return (
-    <form id="form">
+    <form id="form" onSubmit={handleSubmit}>
       <TodoFormInput
         label="Add a ToDo"
         type="text"
@@ -45,12 +45,7 @@ export default function TodoForm() {
         name="todoPriority"
         onChange={handleInputChange}
       />
-      <Button
-        type="submit"
-        variant="success"
-        id="submitBtn"
-        onClick={handleSubmit}
-      >
+      <Button type="submit" variant="success" id="submitBtn">
         Add ToDo
       </Button>
     </form>
