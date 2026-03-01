@@ -1,15 +1,23 @@
 import { useState } from "react";
-
 import TodoFormInput from "./TodoFormInput";
 import Button from "../UI/Button";
+import { createTodoStore } from "../utils/TodoStore";
+
+// create a single store instance at module scope so it isn't
+// recreated on every render.  previously the call lived inside the
+// component, which meant a fresh empty `todos` array each time the
+// form rendered and therefore nothing accumulated.
+const todoStore = createTodoStore();
 
 export default function TodoForm() {
   console.log("- TodoForm rendered");
 
-  const [todo, setTodo] = useState({
+  const initialValue = {
     todoInput: "",
     todoPriority: null,
-  });
+  };
+
+  const [todo, setTodo] = useState(initialValue);
 
   function handleInputChange(e) {
     const target = e.target;
@@ -25,7 +33,8 @@ export default function TodoForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(todo);
+    todoStore.add(todo);
+    setTodo(initialValue);
   }
 
   return (
@@ -36,6 +45,7 @@ export default function TodoForm() {
         id="todoInput"
         name="todoInput"
         className="form-label"
+        value={todo.todoInput}
         onChange={handleInputChange}
       />
       <TodoFormInput
@@ -43,6 +53,7 @@ export default function TodoForm() {
         type="checkbox"
         id="todoPriority"
         name="todoPriority"
+        checked={!!todo.todoPriority}
         onChange={handleInputChange}
       />
       <Button type="submit" variant="success" id="submitBtn">
