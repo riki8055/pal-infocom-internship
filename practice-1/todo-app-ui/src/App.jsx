@@ -1,6 +1,7 @@
 import "./App.css";
 
 import TodoForm from "./components/TodoForm";
+import Button from "./UI/Button";
 
 function App() {
   console.log("App rendered");
@@ -15,27 +16,35 @@ function App() {
         <div class="card-body">
           <div class="info"></div>
           <div class="btns d-flex">
-            <button
+            <Button
               type="button"
-              class="btn btn-secondary me-2"
+              className="me-2"
+              variant="secondary"
               id="clearCompletedBtn"
             >
               Clear Completed
-            </button>
+            </Button>
 
-            <button type="button" class="btn btn-danger me-2" id="clearAllBtn">
+            <Button
+              type="button"
+              className="me-2"
+              variant="danger"
+              id="clearAllBtn"
+            >
               Clear All
-            </button>
+            </Button>
 
             <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
+              <Button
                 type="button"
+                className="dropdown-toggle"
+                variant="secondary"
+                id="clearCompletedBtn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 More Actions
-              </button>
+              </Button>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
                   <button
