@@ -12,7 +12,7 @@ export default function DropDownBtns({
       onClick: onRemovePriority,
     },
     { id: "popOutBtn", label: "Pop out last ToDo", onClick: onPopOutLast },
-    { id: "clearRangeBtn", label: "Delete ToDo in a range" },
+    { id: "clearRangeBtn", label: "Delete ToDo in a range", disabled: true },
   ];
 
   return (
@@ -24,6 +24,7 @@ export default function DropDownBtns({
             href="#"
             id={action.id}
             onClick={action.onClick}
+            disabled={action.disabled}
           >
             {action.label}
           </button>
