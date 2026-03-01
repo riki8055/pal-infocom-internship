@@ -22,6 +22,10 @@ function App() {
     setTodos((prev) => prev.filter((t) => !t.completed));
   }
 
+  function handleClearAll() {
+    setTodos([]);
+  }
+
   function handleTodoClick(index) {
     setTodos((prev) =>
       prev.map((t, i) => (i === index ? { ...t, completed: !t.completed } : t)),
@@ -82,6 +86,7 @@ function App() {
               className="me-2"
               variant="danger"
               id="clearAllBtn"
+              onClick={handleClearAll}
             >
               Clear All
             </Button>
