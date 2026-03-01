@@ -11,7 +11,7 @@ function App() {
 
   const initialFormValue = {
     todoInput: "",
-    todoPriority: null,
+    todoPriority: false,
   };
 
   const [todos, setTodos] = useState([]);
@@ -25,6 +25,7 @@ function App() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      completed: false,
     }));
   }
 
