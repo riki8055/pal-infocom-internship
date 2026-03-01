@@ -2,6 +2,7 @@ import "./App.css";
 
 import TodoForm from "./components/TodoForm";
 import Button from "./UI/Button";
+import DropDownBtns from "./components/DropDownBtns";
 
 function App() {
   console.log("App rendered");
@@ -45,27 +46,7 @@ function App() {
               >
                 More Actions
               </Button>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <button
-                    class="dropdown-item btn"
-                    href="#"
-                    id="removePriorityBtn"
-                  >
-                    Remove ToDo at priority
-                  </button>
-                </li>
-                <li>
-                  <button class="dropdown-item btn" href="#" id="popOutBtn">
-                    Pop out last ToDo
-                  </button>
-                </li>
-                <li>
-                  <button class="dropdown-item btn" href="#" id="clearRangeBtn">
-                    Delete ToDo in a range
-                  </button>
-                </li>
-              </ul>
+              <DropDownBtns />
             </div>
           </div>
         </div>
