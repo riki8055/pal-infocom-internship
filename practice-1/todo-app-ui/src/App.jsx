@@ -26,6 +26,10 @@ function App() {
     setTodos([]);
   }
 
+  function handleRemovePriority() {
+    setTodos((prev) => prev.filter((t) => !t.todoPriority));
+  }
+
   function handleTodoClick(index) {
     setTodos((prev) =>
       prev.map((t, i) => (i === index ? { ...t, completed: !t.completed } : t)),
@@ -102,7 +106,10 @@ function App() {
               >
                 More Actions
               </Button>
-              <DropDownBtns />
+              <DropDownBtns
+                todos={todos}
+                onRemovePriority={handleRemovePriority}
+              />
             </div>
           </div>
         </div>
