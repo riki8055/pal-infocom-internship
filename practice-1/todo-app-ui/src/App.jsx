@@ -12,10 +12,17 @@ function App() {
   const initialFormValue = {
     todoInput: "",
     todoPriority: false,
+    completed: false,
   };
 
   const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState(initialFormValue);
+
+  function handleTodoClick(index) {
+    setTodos((prev) =>
+      prev.map((t, i) => (i === index ? { ...t, completed: !t.completed } : t)),
+    );
+  }
 
   function handleInputChange(e) {
     const target = e.target;
@@ -25,7 +32,6 @@ function App() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-      completed: false,
     }));
   }
 
@@ -53,7 +59,7 @@ function App() {
             onSubmit={handleSubmit}
           />
         </div>
-        <Todos todos={todos} />
+        <Todos todos={todos} onClickTodo={handleTodoClick} />
         <div class="card-body">
           <div class="info"></div>
           <div class="btns d-flex">
