@@ -1,12 +1,11 @@
 import TaskManager from "./components/TaskManager";
 import RegistrationForm from "./components/RegistrationForm";
+import MyBrowserRouter from "./components/BrowserRouter";
 
 function App() {
   return (
     <>
-      <TaskManager />
-      <hr />
-      <RegistrationForm />
+      <MyBrowserRouter />
     </>
   );
 }
