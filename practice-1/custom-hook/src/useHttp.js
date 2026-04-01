@@ -1,0 +1,25 @@
+export async function fetchPokemons() {
+  try {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch pokemons!");
+    }
+
+    for (const pokemon of data.results) {
+      const res = await fetch(pokemon.url);
+      const details = await res.json();
+
+      console.log({
+        name: details.name,
+        height: details.height,
+        weight: details.weight,
+      });
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
