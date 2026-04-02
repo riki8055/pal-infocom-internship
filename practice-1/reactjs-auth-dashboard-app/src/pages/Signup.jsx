@@ -24,11 +24,33 @@ function Signup() {
     e.preventDefault();
 
     const errors = validateSignup(formData);
+    // Get existing users
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check duplicate email
+    const userExists = users.find((user) => user.email === formData.email);
+
+    if (userExists) {
+      errors.email = "Email already exists";
+    }
 
     if (Object.keys(errors).length > 0) {
       dispatch({ type: "SET_ERRORS", errors });
       return;
     }
+
+    const newUser = formData;
+
+    // Save user to localStorage
+    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+
+    console.log("User created:", newUser);
+    dispatch({ type: "RESET" });
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+    });
   }
 
   return (

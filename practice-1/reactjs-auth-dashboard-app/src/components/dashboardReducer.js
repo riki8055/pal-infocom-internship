@@ -10,6 +10,9 @@ export function dashboardReducer(state, action) {
         errors: action.errors,
       };
 
+    case "RESET":
+      return initialState;
+
     default:
       return state;
   }
