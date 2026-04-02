@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
+import { validateSignup } from "../utils/validateSignup";
+import { dashboardReducer, initialState } from "../components/dashboardReducer";
 import styles from "./Signup.module.css";
 
 function Signup() {
+  const [state, dispatch] = useReducer(dashboardReducer, initialState);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +23,12 @@ function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(formData);
+    const errors = validateSignup(formData);
+
+    if (Object.keys(errors).length > 0) {
+      dispatch({ type: "SET_ERRORS", errors });
+      return;
+    }
   }
 
   return (
@@ -36,6 +44,7 @@ function Signup() {
           value={formData.name}
           onChange={handleChange}
         />
+        {state.errors.name && <p>{state.errors.name}</p>}
 
         <input
           className={styles.input}
@@ -45,6 +54,7 @@ function Signup() {
           value={formData.email}
           onChange={handleChange}
         />
+        {state.errors.email && <p>{state.errors.email}</p>}
 
         <input
           className={styles.input}
@@ -54,6 +64,7 @@ function Signup() {
           value={formData.password}
           onChange={handleChange}
         />
+        {state.errors.password && <p>{state.errors.password}</p>}
 
         <button className={styles.button} type="submit">
           Signup
