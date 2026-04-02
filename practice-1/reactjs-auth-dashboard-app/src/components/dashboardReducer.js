@@ -9,5 +9,8 @@ export function dashboardReducer(state, action) {
         ...state,
         errors: action.errors,
       };
+
+    default:
+      return state;
   }
 }
