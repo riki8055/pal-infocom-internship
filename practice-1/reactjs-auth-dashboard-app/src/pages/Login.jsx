@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -73,6 +75,9 @@ function Login() {
     // Reset form
     setFormData({ email: "", password: "" });
     setErrors({});
+
+    // Redirect to dashboard
+    navigate("/");
   }
 
   return (
