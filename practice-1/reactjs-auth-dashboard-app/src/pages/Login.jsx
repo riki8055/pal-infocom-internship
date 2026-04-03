@@ -59,11 +59,20 @@ function Login() {
       return;
     }
 
+    // ✅ Create session
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify({
+        name: user.name,
+        email: user.email,
+      }),
+    );
+
     console.log("Login successful:", user);
-    // TODO: Handle successful login (e.g., redirect, store token)
 
     // Reset form
     setFormData({ email: "", password: "" });
+    setErrors({});
   }
 
   return (
