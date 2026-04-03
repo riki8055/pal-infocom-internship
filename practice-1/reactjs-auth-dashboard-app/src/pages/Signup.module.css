@@ -18,7 +18,19 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .input {
@@ -26,13 +38,39 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .input:focus {
   outline: none;
   border-color: #4caf50;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.3);
+}
+
+.fieldError {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.errorMessage {
+  background-color: #ffe6e6;
+  border: 1px solid #e74c3c;
+  color: #c0392b;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
 .button {
@@ -45,6 +83,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .button:hover {
@@ -53,6 +92,25 @@
 
 .button:active {
   background-color: #3d8b40;
+}
+
+.signupLink {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.signupLink a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.signupLink a:hover {
+  color: #45a049;
+  text-decoration: underline;
 }
 
 .successMessage {

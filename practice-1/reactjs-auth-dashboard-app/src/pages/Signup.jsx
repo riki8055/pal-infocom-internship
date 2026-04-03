@@ -94,40 +94,68 @@ function Signup() {
       )}
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {state.errors.name && <p>{state.errors.name}</p>}
+        <div className={styles.formGroup}>
+          <label htmlFor="name" className={styles.label}>
+            Name
+          </label>
+          <input
+            className={`${styles.input} ${state.errors.name ? styles.inputError : ""}`}
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          {state.errors.name && (
+            <span className={styles.fieldError}>{state.errors.name}</span>
+          )}
+        </div>
 
-        <input
-          className={styles.input}
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        {state.errors.email && <p>{state.errors.email}</p>}
+        <div className={styles.formGroup}>
+          <label htmlFor="email" className={styles.label}>
+            Email
+          </label>
+          <input
+            className={`${styles.input} ${state.errors.email ? styles.inputError : ""}`}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {state.errors.email && (
+            <span className={styles.fieldError}>{state.errors.email}</span>
+          )}
+        </div>
 
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        {state.errors.password && <p>{state.errors.password}</p>}
+        <div className={styles.formGroup}>
+          <label htmlFor="password" className={styles.label}>
+            Password
+          </label>
+          <input
+            className={`${styles.input} ${state.errors.password ? styles.inputError : ""}`}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {state.errors.password && (
+            <span className={styles.fieldError}>{state.errors.password}</span>
+          )}
+        </div>
 
         <button className={styles.button} type="submit">
           Signup
         </button>
       </form>
+
+      <p className={styles.signupLink}>
+        Already have an account? <a href="/login">Login here</a>
+      </p>
     </div>
   );
 }
