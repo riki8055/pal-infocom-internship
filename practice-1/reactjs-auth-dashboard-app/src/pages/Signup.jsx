@@ -1,10 +1,14 @@
 import { useState, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { validateSignup } from "../utils/validateSignup";
 import { dashboardReducer, initialState } from "../components/dashboardReducer";
+import { createSuccessMessage } from "../utils/successMessage";
 import styles from "./Signup.module.css";
 
 function Signup() {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(dashboardReducer, initialState);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,17 +49,49 @@ function Signup() {
     localStorage.setItem("users", JSON.stringify([...users, newUser]));
 
     console.log("User created:", newUser);
+
+    // Set success message
+    const successMsg = createSuccessMessage(
+      `Account created successfully! Redirecting to login...`,
+      3000,
+    );
+    setSuccessMessage(successMsg);
+
+    // Reset form and reducer state
     dispatch({ type: "RESET" });
     setFormData({
       name: "",
       email: "",
       password: "",
     });
+
+    // Redirect to login after delay
+    setTimeout(() => {
+      navigate("/login");
+    }, 3000);
+  }
+
+  function handleDismissSuccess() {
+    setSuccessMessage(null);
   }
 
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Signup</h2>
+
+      {successMessage && (
+        <div className={styles.successMessage}>
+          <span>{successMessage.message}</span>
+          <button
+            type="button"
+            className={styles.dismissButton}
+            onClick={handleDismissSuccess}
+            aria-label="Close success message"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
