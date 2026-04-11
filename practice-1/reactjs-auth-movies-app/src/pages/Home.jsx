@@ -1,4 +1,4 @@
-function SearchMovie() {
+function Home() {
   return (
     <div>
       <h1>Search Movie</h1>
@@ -6,4 +6,4 @@ function SearchMovie() {
   );
 }
 
-export default SearchMovie;
+export default Home;

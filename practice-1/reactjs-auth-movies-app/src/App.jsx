@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
-import SearchMovie from "./pages/SearchMovie";
+import Home from "./pages/Home";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<SearchMovie />} />
+          <Route path="/" element={<Home />} />
           <Route path="/movies" element={<div>Movies Page - Coming Soon</div>} />
           <Route path="/favorites" element={<div>Favorites Page - Coming Soon</div>} />
           <Route path="/signup" element={<Signup />} />
