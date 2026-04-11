@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -61,14 +63,11 @@ function Login() {
       return;
     }
 
-    // ✅ Create session
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify({
-        name: user.name,
-        email: user.email,
-      }),
-    );
+    // ✅ Create session using AuthContext
+    login({
+      name: user.name,
+      email: user.email,
+    });
 
     console.log("Login successful:", user);
 
