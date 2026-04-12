@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useOmdbApi } from "../hooks/useOmdbApi";
+import { useFavorites } from "../contexts/FavoritesContext";
 import styles from "./Movies.module.css";
 
 function Movies() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [favorites, setFavorites] = useState(new Set());
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const { addFavorite, removeFavorite, favoriteIds } = useFavorites();
 
   // Debounce search to avoid too many API calls
   useEffect(() => {
@@ -22,16 +23,12 @@ function Movies() {
 
   const movies = data?.Search || [];
 
-  const toggleFavorite = (movieId) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(movieId)) {
-        newFavorites.delete(movieId);
-      } else {
-        newFavorites.add(movieId);
-      }
-      return newFavorites;
-    });
+  const toggleFavorite = (movie) => {
+    if (favoriteIds.has(movie.imdbID)) {
+      removeFavorite(movie.imdbID);
+    } else {
+      addFavorite(movie);
+    }
   };
 
   return (
@@ -83,16 +80,16 @@ function Movies() {
 
               <button
                 className={`${styles.favoriteButton} ${
-                  favorites.has(movie.imdbID) ? styles.favorited : ""
+                  favoriteIds.has(movie.imdbID) ? styles.favorited : ""
                 }`}
-                onClick={() => toggleFavorite(movie.imdbID)}
+                onClick={() => toggleFavorite(movie)}
                 aria-label={
-                  favorites.has(movie.imdbID)
+                  favoriteIds.has(movie.imdbID)
                     ? "Remove from favorites"
                     : "Add to favorites"
                 }
               >
-                {favorites.has(movie.imdbID) ? "❤️" : "🤍"}
+                {favoriteIds.has(movie.imdbID) ? "❤️" : "🤍"}
               </button>
 
               <div className={styles.cardContent}>

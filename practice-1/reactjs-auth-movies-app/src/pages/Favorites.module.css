@@ -1,0 +1,139 @@
+.favorites {
+  min-height: calc(100vh - 70px);
+  padding: 2rem;
+  background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 60%, #415a77 100%);
+  color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+}
+
+.pageTitle {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.pageSubtitle {
+  margin: 0;
+  color: #c0d6df;
+  font-size: 1rem;
+}
+
+.emptyState {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.emptyState h2 {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+}
+
+.emptyState p {
+  margin: 0;
+  color: #c0d6df;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.favoriteCard {
+  position: relative;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.favoriteCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 45px rgba(0, 0, 0, 0.45);
+}
+
+.cardContent {
+  width: 100%;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.movieType {
+  margin: 0 0 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.8rem;
+  color: #ffb86c;
+}
+
+.movieTitle {
+  margin: 0 0 0.7rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.movieMeta {
+  margin: 0 0 1.25rem;
+  color: #c0d6df;
+  font-size: 0.95rem;
+}
+
+.removeButton {
+  padding: 0.8rem 1.1rem;
+  background: rgba(231, 76, 60, 0.95);
+  border: none;
+  border-radius: 999px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.removeButton:hover {
+  background: #d63f45;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .favoriteCard {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .favorites {
+    padding: 1.2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favoriteCard {
+    min-height: 240px;
+  }
+}
