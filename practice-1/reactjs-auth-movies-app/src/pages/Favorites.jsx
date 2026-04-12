@@ -1,8 +1,14 @@
 import { useFavorites } from "../contexts/FavoritesContext";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Favorites.module.css";
 
 function Favorites() {
   const { favorites, removeFavorite } = useFavorites();
+  const { user } = useAuth();
+
+  const userFavorites = favorites.filter(
+    (fav) => fav.user?.email === user?.email,
+  );
 
   return (
     <main className={styles.favorites}>
@@ -16,7 +22,7 @@ function Favorites() {
         </div>
       </header>
 
-      {favorites.length === 0 ? (
+      {userFavorites.length === 0 ? (
         <div className={styles.emptyState}>
           <h2>No favorites yet</h2>
           <p>
@@ -25,22 +31,22 @@ function Favorites() {
         </div>
       ) : (
         <section className={styles.grid}>
-          {favorites.map((movie) => (
+          {userFavorites.map((fav) => (
             <article
-              key={movie.imdbID}
+              key={fav.movie.imdbID}
               className={styles.favoriteCard}
               style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.9)), url('${movie.Poster}')`,
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.9)), url('${fav.movie.Poster}')`,
               }}
             >
               <div className={styles.cardContent}>
-                <p className={styles.movieType}>{movie.Type}</p>
-                <h2 className={styles.movieTitle}>{movie.Title}</h2>
-                <p className={styles.movieMeta}>{movie.Year}</p>
+                <p className={styles.movieType}>{fav.movie.Type}</p>
+                <h2 className={styles.movieTitle}>{fav.movie.Title}</h2>
+                <p className={styles.movieMeta}>{fav.movie.Year}</p>
                 <button
                   type="button"
                   className={styles.removeButton}
-                  onClick={() => removeFavorite(movie.imdbID)}
+                  onClick={() => removeFavorite(fav.movie.imdbID)}
                 >
                   Remove
                 </button>

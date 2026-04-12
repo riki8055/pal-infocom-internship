@@ -5,6 +5,7 @@ import {
   useMemo,
   useReducer,
 } from "react";
+import { useAuth } from "./AuthContext";
 
 const FavoritesContext = createContext();
 
@@ -21,19 +22,22 @@ function favoritesReducer(state, action) {
 
     case "ADD_FAVORITE": {
       if (
-        state.favorites.some((movie) => movie.imdbID === action.movie.imdbID)
+        state.favorites.some((fav) => fav.movie.imdbID === action.movie.imdbID)
       ) {
         return state;
       }
       return {
-        favorites: [...state.favorites, action.movie],
+        favorites: [
+          ...state.favorites,
+          { movie: action.movie, user: action.user },
+        ],
       };
     }
 
     case "REMOVE_FAVORITE":
       return {
         favorites: state.favorites.filter(
-          (movie) => movie.imdbID !== action.imdbID,
+          (fav) => fav.movie.imdbID !== action.imdbID,
         ),
       };
 
@@ -43,6 +47,7 @@ function favoritesReducer(state, action) {
 }
 
 export function FavoritesProvider({ children }) {
+  const { user } = useAuth();
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     const storedFavorites = localStorage.getItem("favoriteMovies");
     return storedFavorites
@@ -55,7 +60,7 @@ export function FavoritesProvider({ children }) {
   }, [state.favorites]);
 
   const addFavorite = (movie) => {
-    dispatch({ type: "ADD_FAVORITE", movie });
+    dispatch({ type: "ADD_FAVORITE", movie, user });
   };
 
   const removeFavorite = (imdbID) => {
@@ -63,10 +68,10 @@ export function FavoritesProvider({ children }) {
   };
 
   const isFavorite = (imdbID) =>
-    state.favorites.some((movie) => movie.imdbID === imdbID);
+    state.favorites.some((fav) => fav.movie.imdbID === imdbID);
 
   const favoriteIds = useMemo(
-    () => new Set(state.favorites.map((movie) => movie.imdbID)),
+    () => new Set(state.favorites.map((fav) => fav.movie.imdbID)),
     [state.favorites],
   );
 
