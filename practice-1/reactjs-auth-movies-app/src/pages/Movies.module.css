@@ -1,0 +1,274 @@
+.movies {
+  min-height: calc(100vh - 70px);
+  padding: 2rem;
+  background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 60%, #415a77 100%);
+  color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.pageTitle {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.pageSubtitle {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #c0d6df;
+}
+
+.searchContainer {
+  max-width: 1400px;
+  margin: 0 auto 2.5rem;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.9rem 1.1rem 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(255, 127, 80, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 127, 80, 0.2);
+}
+
+.searchIcon {
+  position: absolute;
+  right: 1.1rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.movieCard {
+  position: relative;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+.movieCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.movieCard:hover .cardOverlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.98) 100%
+  );
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.favoriteButton:hover {
+  background: rgba(255, 127, 80, 0.3);
+  transform: scale(1.1);
+}
+
+.favoriteButton.favorited {
+  background: rgba(255, 127, 80, 0.4);
+  box-shadow: 0 0 20px rgba(255, 127, 80, 0.3);
+}
+
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  z-index: 2;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.movieCard:hover .cardContent {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.movieTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.movieDescription {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #c0d6df;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.noResults {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.noResultsText {
+  font-size: 1.1rem;
+  color: #c0d6df;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .movies {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .movieCard {
+    height: 240px;
+  }
+
+  .pageTitle {
+    font-size: 1.8rem;
+  }
+
+  .pageSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .movieTitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .movieDescription {
+    font-size: 0.85rem;
+  }
+
+  .favoriteButton {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .movieCard {
+    height: 200px;
+  }
+
+  .movies {
+    padding: 1rem;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .searchInput {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}

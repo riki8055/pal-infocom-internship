@@ -3,6 +3,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Movies from "./pages/Movies";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -12,8 +13,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<div>Movies Page - Coming Soon</div>} />
-          <Route path="/favorites" element={<div>Favorites Page - Coming Soon</div>} />
+          <Route path="/movies" element={<Movies />} />
+          <Route
+            path="/favorites"
+            element={<div>Favorites Page - Coming Soon</div>}
+          />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
