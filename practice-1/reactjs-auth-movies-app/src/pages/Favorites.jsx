@@ -22,7 +22,12 @@ function Favorites() {
         </div>
       </header>
 
-      {userFavorites.length === 0 ? (
+      {!user ? (
+        <div className={styles.emptyState}>
+          <h2>Please log in</h2>
+          <p>Log in to view your favorite movies.</p>
+        </div>
+      ) : userFavorites.length === 0 ? (
         <div className={styles.emptyState}>
           <h2>No favorites yet</h2>
           <p>

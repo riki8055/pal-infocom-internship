@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useOmdbApi } from "../hooks/useOmdbApi";
 import { useFavorites } from "../contexts/FavoritesContext";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Movies.module.css";
 
 function Movies() {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const { addFavorite, removeFavorite, favoriteIds } = useFavorites();
+  const { user } = useAuth();
 
   // Debounce search to avoid too many API calls
   useEffect(() => {
@@ -78,19 +80,21 @@ function Movies() {
             >
               <div className={styles.cardOverlay}></div>
 
-              <button
-                className={`${styles.favoriteButton} ${
-                  favoriteIds.has(movie.imdbID) ? styles.favorited : ""
-                }`}
-                onClick={() => toggleFavorite(movie)}
-                aria-label={
-                  favoriteIds.has(movie.imdbID)
-                    ? "Remove from favorites"
-                    : "Add to favorites"
-                }
-              >
-                {favoriteIds.has(movie.imdbID) ? "❤️" : "🤍"}
-              </button>
+              {user && (
+                <button
+                  className={`${styles.favoriteButton} ${
+                    favoriteIds.has(movie.imdbID) ? styles.favorited : ""
+                  }`}
+                  onClick={() => toggleFavorite(movie)}
+                  aria-label={
+                    favoriteIds.has(movie.imdbID)
+                      ? "Remove from favorites"
+                      : "Add to favorites"
+                  }
+                >
+                  {favoriteIds.has(movie.imdbID) ? "❤️" : "🤍"}
+                </button>
+              )}
 
               <div className={styles.cardContent}>
                 <h2 className={styles.movieTitle}>{movie.Title}</h2>
