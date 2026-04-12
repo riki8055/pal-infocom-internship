@@ -1,8 +1,107 @@
+import styles from "./Home.module.css";
+
 function Home() {
   return (
-    <div>
-      <h1>Search Movie</h1>
-    </div>
+    <main className={styles.home}>
+      <section className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <h1 className={styles.title}>Discover your next favorite movie.</h1>
+          <p className={styles.subtitle}>
+            Search top movies, browse curated collections, and keep track of
+            your favorite releases—all from one sleek dashboard.
+          </p>
+
+          <div className={styles.searchPanel}>
+            <input
+              className={styles.searchInput}
+              type="text"
+              placeholder="Search by title, actor, or genre"
+            />
+            <button className={styles.searchButton} type="button">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.heroIllustration}>
+          <h3>Movie Dashboard</h3>
+          <p>
+            Explore stats, trending picks, and quick actions to power your movie
+            discovery.
+          </p>
+        </div>
+      </section>
+
+      <section className={styles.cardsGrid}>
+        <article className={styles.card}>
+          <p className={styles.cardTitle}>Trending Now</p>
+          <p className={styles.cardValue}>24 Movies</p>
+          <p className={styles.cardNote}>
+            See the latest trending titles across all genres.
+          </p>
+        </article>
+
+        <article className={styles.card}>
+          <p className={styles.cardTitle}>Watchlist</p>
+          <p className={styles.cardValue}>10 Items</p>
+          <p className={styles.cardNote}>
+            Movies saved for later viewing and recommendations.
+          </p>
+        </article>
+
+        <article className={styles.card}>
+          <p className={styles.cardTitle}>Favorites</p>
+          <p className={styles.cardValue}>8 Stars</p>
+          <p className={styles.cardNote}>
+            Your top-rated movies and personal favorites.
+          </p>
+        </article>
+      </section>
+
+      <section className={styles.featureSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Featured Picks</h2>
+          <a className={styles.viewAll} href="/movies">
+            View all
+          </a>
+        </div>
+
+        <div className={styles.featureGrid}>
+          <article className={styles.featureCard}>
+            <div className={styles.featureMedia}>The Adventure Begins</div>
+            <div className={styles.featureContent}>
+              <h3 className={styles.featureName}>Epic Voyage</h3>
+              <p className={styles.featureDesc}>
+                A high-energy action thriller with stunning visuals and
+                unforgettable characters.
+              </p>
+            </div>
+          </article>
+
+          <article className={styles.featureCard}>
+            <div className={styles.featureMedia}>Critic’s Choice</div>
+            <div className={styles.featureContent}>
+              <h3 className={styles.featureName}>Moonlight Drive</h3>
+              <p className={styles.featureDesc}>
+                An atmospheric drama that captivates from the first scene to the
+                last.
+              </p>
+            </div>
+          </article>
+
+          <article className={styles.featureCard}>
+            <div className={styles.featureMedia}>Award Winner</div>
+            <div className={styles.featureContent}>
+              <h3 className={styles.featureName}>Starlight Echoes</h3>
+              <p className={styles.featureDesc}>
+                A bold sci-fi adventure built around a powerful emotional
+                journey.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
   );
 }
 
