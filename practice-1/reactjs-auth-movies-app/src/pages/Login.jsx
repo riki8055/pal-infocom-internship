@@ -5,13 +5,11 @@ import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, errors, setErrors, clearError, clearAllErrors } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -23,10 +21,7 @@ function Login() {
 
     // Clear error for this field when user starts typing
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
+      clearError(name);
     }
   }
 
@@ -71,9 +66,9 @@ function Login() {
 
     console.log("Login successful:", user);
 
-    // Reset form
+    // Reset form and errors
     setFormData({ email: "", password: "" });
-    setErrors({});
+    clearAllErrors();
 
     // Redirect to dashboard
     navigate("/");
