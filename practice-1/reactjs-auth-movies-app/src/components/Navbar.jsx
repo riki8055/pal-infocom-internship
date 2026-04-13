@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./Navbar.module.css";
 
-function Navbar() {
+function Navbar({ onAuthReset }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,12 +66,20 @@ function Navbar() {
             </div>
           ) : (
             <div className={styles.authLinks}>
-              <Link to="/login" className={styles.authLink}>
-                Login
-              </Link>
-              <Link to="/signup" className={styles.authLink}>
-                Signup
-              </Link>
+              <Link
+            to="/login"
+            className={styles.authLink}
+            onClick={() => onAuthReset?.()}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className={styles.authLink}
+            onClick={() => onAuthReset?.()}
+          >
+            Signup
+          </Link>
             </div>
           )}
         </div>
@@ -108,14 +116,20 @@ function Navbar() {
               <Link
                 to="/login"
                 className={styles.mobileAuthLink}
-                onClick={closeMenu}
+                onClick={() => {
+                  onAuthReset?.();
+                  closeMenu();
+                }}
               >
                 Login
               </Link>
               <Link
                 to="/signup"
                 className={styles.mobileAuthLink}
-                onClick={closeMenu}
+                onClick={() => {
+                  onAuthReset?.();
+                  closeMenu();
+                }}
               >
                 Signup
               </Link>

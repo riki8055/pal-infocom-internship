@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { validateSignup } from "../utils/validateSignup";
 import { createSuccessMessage } from "../utils/successMessage";
@@ -7,7 +7,7 @@ import styles from "./Signup.module.css";
 
 function Signup() {
   const navigate = useNavigate();
-  const { errors, setErrors, clearAllErrors } = useAuth();
+  const { errors, setErrors, clearAllErrors, reset } = useAuth();
   const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -154,7 +154,10 @@ function Signup() {
       </form>
 
       <p className={styles.signupLink}>
-        Already have an account? <a href="/login">Login here</a>
+        Already have an account?{' '}
+        <Link to="/login" onClick={reset} className={styles.link}>
+          Login here
+        </Link>
       </p>
     </div>
   );

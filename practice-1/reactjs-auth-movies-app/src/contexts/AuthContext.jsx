@@ -53,7 +53,10 @@ function authReducer(state, action) {
       };
 
     case "RESET":
-      return initialState;
+      return {
+        ...state,
+        errors: {},
+      };
 
     default:
       return state;
@@ -103,6 +106,10 @@ export function AuthProvider({ children }) {
     dispatch({ type: "CLEAR_ALL_ERRORS" });
   };
 
+  const reset = () => {
+    dispatch({ type: "RESET" });
+  };
+
   const value = {
     user: state.user,
     loading: state.loading,
@@ -112,6 +119,8 @@ export function AuthProvider({ children }) {
     setErrors,
     clearError,
     clearAllErrors,
+    reset,
+    dispatch,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

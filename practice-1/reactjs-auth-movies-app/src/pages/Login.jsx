@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
-  const { login, errors, setErrors, clearError, clearAllErrors } = useAuth();
+  const { login, errors, setErrors, clearError, clearAllErrors, reset } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -127,7 +127,10 @@ function Login() {
       </form>
 
       <p className={styles.signupLink}>
-        Don't have an account? <a href="/signup">Sign up here</a>
+        Don't have an account?{' '}
+        <Link to="/signup" onClick={reset} className={styles.link}>
+          Sign up here
+        </Link>
       </p>
     </div>
   );
