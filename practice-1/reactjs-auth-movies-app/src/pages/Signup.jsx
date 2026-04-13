@@ -1,13 +1,13 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { validateSignup } from "../utils/validateSignup";
-import { moviesReducer, initialState } from "../components/moviesReducer";
 import { createSuccessMessage } from "../utils/successMessage";
 import styles from "./Signup.module.css";
 
 function Signup() {
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(moviesReducer, initialState);
+  const { errors, setErrors, clearAllErrors } = useAuth();
   const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +39,7 @@ function Signup() {
     }
 
     if (Object.keys(errors).length > 0) {
-      dispatch({ type: "SET_ERRORS", errors });
+      setErrors(errors);
       return;
     }
 
@@ -57,8 +57,8 @@ function Signup() {
     );
     setSuccessMessage(successMsg);
 
-    // Reset form and reducer state
-    dispatch({ type: "RESET" });
+    // Reset form and auth errors
+    clearAllErrors();
     setFormData({
       name: "",
       email: "",
@@ -99,7 +99,7 @@ function Signup() {
             Name
           </label>
           <input
-            className={`${styles.input} ${state.errors.name ? styles.inputError : ""}`}
+            className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
             type="text"
             id="name"
             name="name"
@@ -107,8 +107,8 @@ function Signup() {
             value={formData.name}
             onChange={handleChange}
           />
-          {state.errors.name && (
-            <span className={styles.fieldError}>{state.errors.name}</span>
+          {errors.name && (
+            <span className={styles.fieldError}>{errors.name}</span>
           )}
         </div>
 
@@ -117,7 +117,7 @@ function Signup() {
             Email
           </label>
           <input
-            className={`${styles.input} ${state.errors.email ? styles.inputError : ""}`}
+            className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
             type="email"
             id="email"
             name="email"
@@ -125,8 +125,8 @@ function Signup() {
             value={formData.email}
             onChange={handleChange}
           />
-          {state.errors.email && (
-            <span className={styles.fieldError}>{state.errors.email}</span>
+          {errors.email && (
+            <span className={styles.fieldError}>{errors.email}</span>
           )}
         </div>
 
@@ -135,7 +135,7 @@ function Signup() {
             Password
           </label>
           <input
-            className={`${styles.input} ${state.errors.password ? styles.inputError : ""}`}
+            className={`${styles.input} ${errors.password ? styles.inputError : ""}`}
             type="password"
             id="password"
             name="password"
@@ -143,8 +143,8 @@ function Signup() {
             value={formData.password}
             onChange={handleChange}
           />
-          {state.errors.password && (
-            <span className={styles.fieldError}>{state.errors.password}</span>
+          {errors.password && (
+            <span className={styles.fieldError}>{errors.password}</span>
           )}
         </div>
 
