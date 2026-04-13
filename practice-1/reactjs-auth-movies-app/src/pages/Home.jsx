@@ -1,6 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
 function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/movies", { state: { search: searchTerm } });
+  };
+
   return (
     <main className={styles.home}>
       <section className={styles.hero}>
@@ -16,8 +25,14 @@ function Home() {
               className={styles.searchInput}
               type="text"
               placeholder="Search by title, actor, or genre"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <button className={styles.searchButton} type="button">
+            <button
+              className={styles.searchButton}
+              type="button"
+              onClick={handleSearch}
+            >
               Search
             </button>
           </div>

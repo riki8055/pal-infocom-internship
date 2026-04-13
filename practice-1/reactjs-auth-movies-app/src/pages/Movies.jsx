@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useOmdbApi } from "../hooks/useOmdbApi";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./Movies.module.css";
 
 function Movies() {
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const { addFavorite, removeFavorite, favoriteIds } = useFavorites();
@@ -24,6 +26,12 @@ function Movies() {
   });
 
   const movies = data?.Search || [];
+
+  useEffect(() => {
+    if (location.state?.search) {
+      setSearchTerm(location.state.search);
+    }
+  }, [location.state]);
 
   const toggleFavorite = (movie) => {
     if (favoriteIds.has(movie.imdbID)) {
