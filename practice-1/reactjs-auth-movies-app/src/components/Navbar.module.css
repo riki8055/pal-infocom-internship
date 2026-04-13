@@ -106,3 +106,166 @@
 .logoutBtn:hover {
   background-color: #d32f2f;
 }
+
+/* Hamburger Menu Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  margin: 5px 0;
+  transition: all 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+  gap: 10px;
+}
+
+.mobileTab {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 16px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.mobileTab:hover {
+  color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.mobileDivider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+.mobileAuth {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileUsername {
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+}
+
+.mobileLogoutBtn {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mobileLogoutBtn:hover {
+  background-color: #d32f2f;
+}
+
+.mobileAuthLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileAuthLink {
+  text-decoration: none;
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.mobileAuthLink:hover {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    height: 50px;
+    padding: 0 15px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .tabs {
+    display: none;
+  }
+
+  .auth {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 45px;
+    padding: 0 10px;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .mobileMenu {
+    padding: 15px;
+  }
+
+  .mobileTab {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .mobileAuthLink {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
