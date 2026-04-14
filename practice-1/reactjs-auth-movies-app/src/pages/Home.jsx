@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Carousel from "../components/Swiper";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -39,11 +40,7 @@ function Home() {
         </div>
 
         <div className={styles.heroIllustration}>
-          <h3>Movie Dashboard</h3>
-          <p>
-            Explore stats, trending picks, and quick actions to power your movie
-            discovery.
-          </p>
+          <Carousel />
         </div>
       </section>
 

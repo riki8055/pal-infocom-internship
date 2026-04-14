@@ -81,7 +81,7 @@
   place-items: center;
   color: #eef6ff;
   text-align: center;
-  padding: 2rem;
+  overflow: hidden;
 }
 
 .heroIllustration h3 {
