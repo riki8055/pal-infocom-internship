@@ -21,6 +21,10 @@ function Movies() {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
+  useEffect(() => {
+    localStorage.setItem("lastSearchedTerm", debouncedSearch);
+  }, [debouncedSearch]);
+
   const { data, loading, error, fetchMovies } = useOmdbApi({
     query: debouncedSearch,
   });
