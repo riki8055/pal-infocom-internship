@@ -22,7 +22,9 @@ function Movies() {
   }, [searchTerm]);
 
   useEffect(() => {
-    localStorage.setItem("lastSearchedTerm", debouncedSearch);
+    if (debouncedSearch.trim() !== "") {
+      localStorage.setItem("lastSearchedTerm", debouncedSearch);
+    }
   }, [debouncedSearch]);
 
   const { data, loading, error, fetchMovies } = useOmdbApi({
