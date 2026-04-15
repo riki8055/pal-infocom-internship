@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOmdbApi } from "../hooks/useOmdbApi";
 import Carousel from "../components/Swiper";
 import styles from "./Home.module.css";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  
+  // Get last searched term from localStorage
+  const lastSearchedTerm = localStorage.getItem("lastSearchedTerm");
+  
+  // Fetch movies using the last searched term
+  const { data: searchResults, loading: loadingCarousel } = useOmdbApi({
+    query: lastSearchedTerm || "",
+  });
 
   const handleSearch = () => {
     navigate("/movies", { state: { search: searchTerm } });
@@ -40,7 +49,7 @@ function Home() {
         </div>
 
         <div className={styles.heroIllustration}>
-          <Carousel />
+          <Carousel movies={searchResults?.Search?.slice(0, 3) || []} loading={loadingCarousel} />
         </div>
       </section>
 
