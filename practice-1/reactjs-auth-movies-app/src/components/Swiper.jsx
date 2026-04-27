@@ -9,25 +9,32 @@ import "swiper/css/pagination";
 // Optional modules
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-function Carousel() {
-  // Dummy movie data
+function Carousel({ movies = [], loading = false }) {
+  // Dummy movie data as fallback
   const dummyMovies = [
     {
-      title: "The Great Adventure",
-      poster:
+      Title: "The Great Adventure",
+      Poster:
         "https://via.placeholder.com/300x400/FF0000/FFFFFF?text=The+Great+Adventure",
     },
     {
-      title: "Mystery Island",
-      poster:
+      Title: "Mystery Island",
+      Poster:
         "https://via.placeholder.com/300x400/00FF00/FFFFFF?text=Mystery+Island",
     },
     {
-      title: "Space Odyssey",
-      poster:
+      Title: "Space Odyssey",
+      Poster:
         "https://via.placeholder.com/300x400/0000FF/FFFFFF?text=Space+Odyssey",
     },
   ];
+
+  // Use actual movies if available, fallback to dummy data
+  const moviesToDisplay = movies.length > 0 ? movies : dummyMovies;
+
+  if (loading) {
+    return <div style={{ textAlign: "center", padding: "20px", color: "#fff" }}>Loading movies...</div>;
+  }
 
   return (
     <Swiper
@@ -39,12 +46,12 @@ function Carousel() {
       autoplay={{ delay: 3000 }}
       loop={true}
     >
-      {dummyMovies.map((movie, index) => (
+      {moviesToDisplay.map((movie, index) => (
         <SwiperSlide key={index}>
           <div style={{ textAlign: "center", padding: "20px" }}>
             <img
-              src={movie.poster}
-              alt={movie.title}
+              src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x400?text=No+Poster"}
+              alt={movie.Title}
               style={{
                 width: "300px",
                 height: "400px",
@@ -52,7 +59,7 @@ function Carousel() {
                 borderRadius: "8px",
               }}
             />
-            <h3 style={{ marginTop: "10px", color: "#fff" }}>{movie.title}</h3>
+            <h3 style={{ marginTop: "10px", color: "#fff" }}>{movie.Title}</h3>
           </div>
         </SwiperSlide>
       ))}
