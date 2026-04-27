@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1714166400000,
+    "title": "Project Kickoff Meeting",
+    "content": "Discussed project timeline, deliverables, and team responsibilities. Next meeting scheduled for next Monday."
+  },
+  {
+    "id": 1714166400001,
+    "title": "API Documentation",
+    "content": "Complete REST API endpoints documentation. Include request/response examples and error codes."
+  },
+  {
+    "id": 1714166400002,
+    "title": "Bug Fix: Login Issue",
+    "content": "Users unable to login with special characters in password. Root cause: insufficient input validation on backend."
+  },
+  {
+    "id": 1714166400003,
+    "title": "Database Optimization",
+    "content": "Add indexes to users and notes tables to improve query performance. Currently taking 2+ seconds for large datasets."
+  },
+  {
+    "id": 1714166400004,
+    "title": "Code Review Notes",
+    "content": "Review PR #45: Check error handling, add unit tests, and improve variable naming conventions."
+  },
+  {
+    "id": 1714166400005,
+    "title": "Design System Update",
+    "content": "Finalize color palette and typography guidelines. Export design tokens for developers."
+  },
+  {
+    "id": 1714166400007,
+    "title": "Deployment Checklist",
+    "content": "- Run test suite\n- Update environment variables\n- Backup database\n- Deploy to staging\n- Verify functionality"
+  },
+  {
+    "id": 1777299599836,
+    "title": "Hello",
+    "content": "Hello world"
+  }
+]
