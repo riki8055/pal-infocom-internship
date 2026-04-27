@@ -1,20 +1,47 @@
-// Express app setup
-
 const express = require("express");
 const cors = require("cors");
-const app = express();
-const PORT = process.env.PORT || 5000;
+const fs = require("fs");
 
-// Middleware
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Just a simple welcome route
-app.get("/", (req, res) => {
-  res.send("Welcome to the Todo App API!");
+const FILE = "./notes.json";
+
+// Read notes
+const readNotes = () => {
+  return JSON.parse(fs.readFileSync(FILE));
+};
+
+// Write notes
+const writeNotes = (data) => {
+  fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
+};
+
+// Get all notes
+app.get("/notes", (req, res) => {
+  res.json(readNotes());
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Add note
+app.post("/notes", (req, res) => {
+  const notes = readNotes();
+  const newNote = {
+    id: Date.now(),
+    title: req.body.title,
+    content: req.body.content,
+  };
+  notes.push(newNote);
+  writeNotes(notes);
+  res.json(newNote);
 });
+
+// Delete note
+app.delete("/notes/:id", (req, res) => {
+  let notes = readNotes();
+  notes = notes.filter((n) => n.id != req.params.id);
+  writeNotes(notes);
+  res.json({ message: "Deleted" });
+});
+
+app.listen(5000, () => console.log("Server running on port 5000"));
