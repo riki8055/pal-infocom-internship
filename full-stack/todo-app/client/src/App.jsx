@@ -5,7 +5,7 @@ function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const API = "http://localhost:5000/notes";
+  const API = import.meta.env.VITE_SERVER_URL + "notes" || "http://localhost:5000/notes";
 
   useEffect(() => {
     fetch(API)
