@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 // Import route files
+const authRoutes = require("./routes/auth");
 const moviesRoutes = require("./routes/movies");
 
 const app = express();
@@ -32,10 +33,8 @@ app.get("/health", (req, res) => {
 });
 
 // Mount route files
+app.use("/auth", authRoutes);
 app.use("/movies", moviesRoutes);
-
-// TODO: Auth routes will be mounted here
-// app.use("/auth", authRoutes);
 
 // TODO: Favorites routes will be mounted here
 // app.use("/favorites", favoritesRoutes);

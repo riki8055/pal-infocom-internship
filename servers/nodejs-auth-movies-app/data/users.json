@@ -1,0 +1,9 @@
+[
+  {
+    "id": "a37c882e-d743-41b8-aa0f-23ca8c30d304",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "$2b$10$OG7UQizdLuCXwH.tWeetEe/xsU8glhApt3O2YIZpuBj2UscbSmb4W",
+    "createdAt": "2026-05-09T15:19:11.880Z"
+  }
+]
