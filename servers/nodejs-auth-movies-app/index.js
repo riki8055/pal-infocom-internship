@@ -2,6 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+// Import route files
+const moviesRoutes = require("./routes/movies");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -28,11 +31,11 @@ app.get("/health", (req, res) => {
   res.json({ status: "Server is running!", timestamp: new Date() });
 });
 
+// Mount route files
+app.use("/movies", moviesRoutes);
+
 // TODO: Auth routes will be mounted here
 // app.use("/auth", authRoutes);
-
-// TODO: Movies routes will be mounted here
-// app.use("/movies", moviesRoutes);
 
 // TODO: Favorites routes will be mounted here
 // app.use("/favorites", favoritesRoutes);
