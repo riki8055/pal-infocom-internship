@@ -27,7 +27,7 @@ function Movies() {
     }
   }, [debouncedSearch]);
 
-  const { data, loading, error, fetchMovies } = useOmdbApi({
+  const { data, loading, error } = useOmdbApi({
     query: debouncedSearch,
   });
 

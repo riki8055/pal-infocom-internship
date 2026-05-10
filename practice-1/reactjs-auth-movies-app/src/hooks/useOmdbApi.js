@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
-const OMDB_API_URL = "https://www.omdbapi.com/";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-function buildOmdbUrl({ apiKey, query, page, type, year }) {
+function buildMoviesUrl({ query, page, type, year }) {
   const params = new URLSearchParams({
-    apikey: apiKey,
-    s: query,
+    q: query,
     page: page?.toString() || "1",
   });
 
   if (type) params.append("type", type);
   if (year) params.append("y", year);
 
-  return `${OMDB_API_URL}?${params.toString()}`;
+  return `${API_BASE_URL}/movies/search?${params.toString()}`;
 }
 
 export function useOmdbApi({
@@ -20,7 +20,6 @@ export function useOmdbApi({
   page = 1,
   type = "",
   year = "",
-  apiKey = import.meta.env.VITE_OMDB_API_KEY,
 } = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,20 +38,11 @@ export function useOmdbApi({
         return null;
       }
 
-      if (!apiKey) {
-        const missingKeyError =
-          "OMDB API key is not configured. Set VITE_OMDB_API_KEY in your environment.";
-        setError(missingKeyError);
-        setData(null);
-        return null;
-      }
-
       setLoading(true);
       setError(null);
 
       try {
-        const url = buildOmdbUrl({
-          apiKey,
+        const url = buildMoviesUrl({
           query: searchQuery,
           page: searchPage,
           type: searchType,
@@ -60,17 +50,18 @@ export function useOmdbApi({
         });
 
         const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Failed to fetch movies from OMDB API.");
-        }
-
         const result = await response.json();
-        if (result.Response === "False") {
-          throw new Error(result.Error || "No results found.");
+
+        if (!response.ok) {
+          throw new Error(result.error || "Failed to fetch movies.");
         }
 
-        setData(result);
-        return result;
+        if (!result.success) {
+          throw new Error(result.error || "No results found.");
+        }
+
+        setData(result.data);
+        return result.data;
       } catch (err) {
         setError(err.message || "An unexpected error occurred.");
         setData(null);
@@ -79,7 +70,7 @@ export function useOmdbApi({
         setLoading(false);
       }
     },
-    [apiKey, page, query, type, year],
+    [page, query, type, year],
   );
 
   useEffect(() => {
