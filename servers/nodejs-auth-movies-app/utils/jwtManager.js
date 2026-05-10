@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 
 /**
  * Sign a JWT token with user data
@@ -8,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
  * @param {string} expiresIn - Token expiration time (default: 7d)
  * @returns {string} JWT token
  */
-function signToken(payload, expiresIn = "7d") {
+function signToken(payload, expiresIn = JWT_EXPIRES_IN) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn });
 }
 

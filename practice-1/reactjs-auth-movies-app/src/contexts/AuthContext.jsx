@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  clearStoredSession,
+  getStoredSession,
+  storeSession,
+} from "../utils/authSession";
 
 const AuthContext = createContext();
 
 const initialState = {
   user: null,
+  token: null,
   loading: true,
   errors: {},
 };
@@ -13,7 +19,8 @@ function authReducer(state, action) {
     case "LOGIN":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        token: action.payload.token,
         loading: false,
         errors: {},
       };
@@ -22,6 +29,7 @@ function authReducer(state, action) {
       return {
         ...state,
         user: null,
+        token: null,
         errors: {},
       };
 
@@ -75,22 +83,22 @@ export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {
-    // Check if user is logged in on app start
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser) {
-      dispatch({ type: "LOGIN", payload: currentUser });
+    const session = getStoredSession();
+
+    if (session) {
+      dispatch({ type: "LOGIN", payload: session });
     } else {
       dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
 
-  const login = (userData) => {
-    localStorage.setItem("currentUser", JSON.stringify(userData));
-    dispatch({ type: "LOGIN", payload: userData });
+  const login = (session) => {
+    storeSession(session);
+    dispatch({ type: "LOGIN", payload: session });
   };
 
   const logout = () => {
-    localStorage.removeItem("currentUser");
+    clearStoredSession();
     dispatch({ type: "LOGOUT" });
   };
 
@@ -112,6 +120,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user: state.user,
+    token: state.token,
     loading: state.loading,
     errors: state.errors,
     login,

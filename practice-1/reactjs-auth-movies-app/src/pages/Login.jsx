@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { loginUser } from "../services/authApi";
 import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
-  const { login, errors, setErrors, clearError, clearAllErrors, reset } = useAuth();
+  const { login, errors, setErrors, clearError, clearAllErrors, reset } =
+    useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,17 +22,19 @@ function Login() {
       [name]: value,
     }));
 
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       clearError(name);
     }
+
+    if (errors.general) {
+      clearError("general");
+    }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const newErrors = {};
 
-    // Validation
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -47,31 +52,26 @@ function Login() {
       return;
     }
 
-    // Check if user exists in localStorage
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email === formData.email && u.password === formData.password,
-    );
+    setIsSubmitting(true);
 
-    if (!user) {
-      setErrors({ general: "Invalid email or password" });
-      return;
+    try {
+      const result = await loginUser(formData);
+
+      login({
+        user: result.user,
+        token: result.token,
+      });
+
+      console.log("Login successful:", result.user);
+
+      setFormData({ email: "", password: "" });
+      clearAllErrors();
+      navigate("/");
+    } catch (error) {
+      setErrors(error.errors || { general: error.message });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // ✅ Create session using AuthContext
-    login({
-      name: user.name,
-      email: user.email,
-    });
-
-    console.log("Login successful:", user);
-
-    // Reset form and errors
-    setFormData({ email: "", password: "" });
-    clearAllErrors();
-
-    // Redirect to dashboard
-    navigate("/");
   }
 
   return (
@@ -121,13 +121,13 @@ function Login() {
           )}
         </div>
 
-        <button className={styles.button} type="submit">
-          Login
+        <button className={styles.button} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </form>
 
       <p className={styles.signupLink}>
-        Don't have an account?{' '}
+        Don't have an account?{" "}
         <Link to="/signup" onClick={reset} className={styles.link}>
           Sign up here
         </Link>
