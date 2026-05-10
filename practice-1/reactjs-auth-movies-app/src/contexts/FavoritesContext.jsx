@@ -6,39 +6,68 @@ import {
   useReducer,
 } from "react";
 import { useAuth } from "./AuthContext";
+import {
+  addFavoriteMovie,
+  getFavorites,
+  removeFavoriteMovie,
+} from "../services/favoritesApi";
 
 const FavoritesContext = createContext();
 
 const initialState = {
   favorites: [],
+  loading: false,
+  error: null,
 };
 
 function favoritesReducer(state, action) {
   switch (action.type) {
     case "INITIALIZE":
       return {
+        ...state,
         favorites: action.favorites,
+        loading: false,
+        error: null,
       };
 
     case "ADD_FAVORITE": {
       if (
-        state.favorites.some((fav) => fav.movie.imdbID === action.movie.imdbID)
+        state.favorites.some(
+          (fav) => fav.movie.imdbID === action.favorite.movie.imdbID,
+        )
       ) {
         return state;
       }
       return {
-        favorites: [
-          ...state.favorites,
-          { movie: action.movie, user: action.user },
-        ],
+        ...state,
+        favorites: [...state.favorites, action.favorite],
+        error: null,
       };
     }
 
     case "REMOVE_FAVORITE":
       return {
+        ...state,
         favorites: state.favorites.filter(
           (fav) => fav.movie.imdbID !== action.imdbID,
         ),
+        error: null,
+      };
+
+    case "CLEAR_FAVORITES":
+      return initialState;
+
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: action.loading,
+      };
+
+    case "SET_ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
       };
 
     default:
@@ -47,24 +76,69 @@ function favoritesReducer(state, action) {
 }
 
 export function FavoritesProvider({ children }) {
-  const { user } = useAuth();
-  const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
-    const storedFavorites = localStorage.getItem("favoriteMovies");
-    return storedFavorites
-      ? { favorites: JSON.parse(storedFavorites) }
-      : initialState;
-  });
+  const { user, token } = useAuth();
+  const [state, dispatch] = useReducer(favoritesReducer, initialState);
 
   useEffect(() => {
-    localStorage.setItem("favoriteMovies", JSON.stringify(state.favorites));
-  }, [state.favorites]);
+    let ignore = false;
 
-  const addFavorite = (movie) => {
-    dispatch({ type: "ADD_FAVORITE", movie, user });
+    async function loadFavorites() {
+      if (!user || !token) {
+        dispatch({ type: "CLEAR_FAVORITES" });
+        return;
+      }
+
+      dispatch({ type: "SET_LOADING", loading: true });
+
+      try {
+        const result = await getFavorites(token);
+
+        if (!ignore) {
+          dispatch({ type: "INITIALIZE", favorites: result.favorites });
+        }
+      } catch (error) {
+        if (!ignore) {
+          dispatch({
+            type: "SET_ERROR",
+            error: error.message || "Failed to load favorites",
+          });
+        }
+      }
+    }
+
+    loadFavorites();
+
+    return () => {
+      ignore = true;
+    };
+  }, [user, token]);
+
+  const addFavorite = async (movie) => {
+    if (!token) return;
+
+    try {
+      const result = await addFavoriteMovie(token, movie);
+      dispatch({ type: "ADD_FAVORITE", favorite: result.favorite });
+    } catch (error) {
+      dispatch({
+        type: "SET_ERROR",
+        error: error.message || "Failed to add favorite",
+      });
+    }
   };
 
-  const removeFavorite = (imdbID) => {
-    dispatch({ type: "REMOVE_FAVORITE", imdbID });
+  const removeFavorite = async (imdbID) => {
+    if (!token) return;
+
+    try {
+      await removeFavoriteMovie(token, imdbID);
+      dispatch({ type: "REMOVE_FAVORITE", imdbID });
+    } catch (error) {
+      dispatch({
+        type: "SET_ERROR",
+        error: error.message || "Failed to remove favorite",
+      });
+    }
   };
 
   const isFavorite = (imdbID) =>
@@ -77,6 +151,8 @@ export function FavoritesProvider({ children }) {
 
   const value = {
     favorites: state.favorites,
+    loading: state.loading,
+    error: state.error,
     favoriteIds,
     addFavorite,
     removeFavorite,

@@ -39,11 +39,11 @@ function Movies() {
     }
   }, [location.state]);
 
-  const toggleFavorite = (movie) => {
+  const toggleFavorite = async (movie) => {
     if (favoriteIds.has(movie.imdbID)) {
-      removeFavorite(movie.imdbID);
+      await removeFavorite(movie.imdbID);
     } else {
-      addFavorite(movie);
+      await addFavorite(movie);
     }
   };
 

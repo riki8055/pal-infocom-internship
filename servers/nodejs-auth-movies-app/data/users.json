@@ -19,5 +19,12 @@
     "email": "server@test.com",
     "password": "$2b$10$x3fFKm1dXxCTAZ165mmoQusfEbGp2GjCK.OhNP6aodUAckx/nLG7q",
     "createdAt": "2026-05-10T01:55:48.689Z"
+  },
+  {
+    "id": "0d05d494-a7e8-4276-925d-f0dc339c1100",
+    "name": "Alex Doe",
+    "email": "alex@mail.com",
+    "password": "$2b$10$Aq9/1j03/8tEL3.U0l9ZbeSa9o3OEAfFtq1JYEPg/o7uH1fymqs8K",
+    "createdAt": "2026-05-10T02:37:30.645Z"
   }
 ]

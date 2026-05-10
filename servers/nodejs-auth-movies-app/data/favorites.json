@@ -11,5 +11,18 @@
       "Poster": "https://example.com/shawshank.jpg"
     },
     "addedAt": "2026-05-10T00:17:21.822Z"
+  },
+  {
+    "id": "3ed5ea25-714c-4fe2-bde5-957b45364223",
+    "userId": "4548a2ab-33b0-48db-af3f-09ee29ecf633",
+    "email": "server@test.com",
+    "movie": {
+      "Title": "Studio 60 on the Sunset Strip",
+      "Year": "2006–2007",
+      "imdbID": "tt0485842",
+      "Type": "series",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZDY2MDUwMTctZjM2OS00MDc2LTgwYzEtODY1MWY0Y2Q5Y2MwXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    "addedAt": "2026-05-10T02:36:43.742Z"
   }
 ]

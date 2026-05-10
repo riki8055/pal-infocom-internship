@@ -3,12 +3,8 @@ import { useAuth } from "../contexts/AuthContext";
 import styles from "./Favorites.module.css";
 
 function Favorites() {
-  const { favorites, removeFavorite } = useFavorites();
+  const { favorites, loading, error, removeFavorite } = useFavorites();
   const { user } = useAuth();
-
-  const userFavorites = favorites.filter(
-    (fav) => fav.user?.email === user?.email,
-  );
 
   return (
     <main className={styles.favorites}>
@@ -27,7 +23,17 @@ function Favorites() {
           <h2>Please log in</h2>
           <p>Log in to view your favorite movies.</p>
         </div>
-      ) : userFavorites.length === 0 ? (
+      ) : loading ? (
+        <div className={styles.emptyState}>
+          <h2>Loading favorites...</h2>
+          <p>Getting your saved movies from the server.</p>
+        </div>
+      ) : error ? (
+        <div className={styles.emptyState}>
+          <h2>Could not load favorites</h2>
+          <p>{error}</p>
+        </div>
+      ) : favorites.length === 0 ? (
         <div className={styles.emptyState}>
           <h2>No favorites yet</h2>
           <p>
@@ -36,7 +42,7 @@ function Favorites() {
         </div>
       ) : (
         <section className={styles.grid}>
-          {userFavorites.map((fav) => (
+          {favorites.map((fav) => (
             <article
               key={fav.movie.imdbID}
               className={styles.favoriteCard}
