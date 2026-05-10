@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { signupUser } from "../services/authApi";
 import { validateSignup } from "../utils/validateSignup";
 import { createSuccessMessage } from "../utils/successMessage";
 import styles from "./Signup.module.css";
 
 function Signup() {
   const navigate = useNavigate();
-  const { errors, setErrors, clearAllErrors, reset } = useAuth();
+  const { errors, setErrors, clearError, clearAllErrors, reset } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -22,53 +24,49 @@ function Signup() {
       ...prev,
       [name]: value,
     }));
+
+    if (errors[name]) {
+      clearError(name);
+    }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const errors = validateSignup(formData);
-    // Get existing users
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // Check duplicate email
-    const userExists = users.find((user) => user.email === formData.email);
-
-    if (userExists) {
-      errors.email = "Email already exists";
-    }
 
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
 
-    const newUser = formData;
+    setIsSubmitting(true);
 
-    // Save user to localStorage
-    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+    try {
+      const result = await signupUser(formData);
+      console.log("User registered:", result.user);
 
-    console.log("User created:", newUser);
+      const successMsg = createSuccessMessage(
+        `${result.message}. Redirecting to login...`,
+        3000,
+      );
+      setSuccessMessage(successMsg);
 
-    // Set success message
-    const successMsg = createSuccessMessage(
-      `Account created successfully! Redirecting to login...`,
-      3000,
-    );
-    setSuccessMessage(successMsg);
+      clearAllErrors();
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+      });
 
-    // Reset form and auth errors
-    clearAllErrors();
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-    });
-
-    // Redirect to login after delay
-    setTimeout(() => {
-      navigate("/login");
-    }, 3000);
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+    } catch (error) {
+      setErrors(error.errors || { general: error.message });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function handleDismissSuccess() {
@@ -91,6 +89,10 @@ function Signup() {
             ×
           </button>
         </div>
+      )}
+
+      {errors.general && (
+        <div className={styles.errorMessage}>{errors.general}</div>
       )}
 
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -148,8 +150,8 @@ function Signup() {
           )}
         </div>
 
-        <button className={styles.button} type="submit">
-          Signup
+        <button className={styles.button} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Creating account..." : "Signup"}
         </button>
       </form>
 
