@@ -21,15 +21,17 @@ async function ensureDataDir() {
  * @returns {Promise<Array>} Parsed JSON array or empty array if file doesn't exist
  */
 async function readJsonFile(filename) {
+  const filePath = path.join(DATA_DIR, filename);
+
   try {
-    const filePath = path.join(DATA_DIR, filename);
     const data = await fs.readFile(filePath, "utf-8");
     return JSON.parse(data);
   } catch (error) {
     if (error.code === "ENOENT") {
-      // File doesn't exist, return empty array
+      await writeJsonFile(filename, []);
       return [];
     }
+
     console.error(`Error reading ${filename}:`, error);
     throw error;
   }
