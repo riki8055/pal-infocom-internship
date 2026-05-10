@@ -5,5 +5,12 @@
     "email": "john@example.com",
     "password": "$2b$10$OG7UQizdLuCXwH.tWeetEe/xsU8glhApt3O2YIZpuBj2UscbSmb4W",
     "createdAt": "2026-05-09T15:19:11.880Z"
+  },
+  {
+    "id": "5514f8c4-bef7-4ff5-a06e-07123ab630d6",
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "password": "$2b$10$5aSgj3jHol9ScBLl3OEGyeSzeF.m7iCJ1bzrzJzaVk7HQYGkNkxx6",
+    "createdAt": "2026-05-10T00:16:42.064Z"
   }
 ]

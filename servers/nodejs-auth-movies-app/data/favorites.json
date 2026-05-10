@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "51f4e612-4344-4e2f-b88e-f4b30a687760",
+    "userId": "5514f8c4-bef7-4ff5-a06e-07123ab630d6",
+    "email": "alice@example.com",
+    "movie": {
+      "imdbID": "tt0111161",
+      "Title": "The Shawshank Redemption",
+      "Year": "1994",
+      "Type": "movie",
+      "Poster": "https://example.com/shawshank.jpg"
+    },
+    "addedAt": "2026-05-10T00:17:21.822Z"
+  }
+]

@@ -9,6 +9,7 @@ const favoritesRoutes = require("./routes/favorites");
 
 // Import middleware
 const errorHandler = require("./middleware/errorHandler");
+const { rateLimiter } = require("./middleware/rateLimiter");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,9 +30,12 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Rate Limiter: Prevent abuse (100 requests per 15 minutes)
+app.use(rateLimiter);
+
 // ==================== ROUTES ====================
 
-// Health check endpoint
+// Health check endpoint (exempt from rate limiting for monitoring)
 app.get("/health", (req, res) => {
   res.json({ status: "Server is running!", timestamp: new Date() });
 });
