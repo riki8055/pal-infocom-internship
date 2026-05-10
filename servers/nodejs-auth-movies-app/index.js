@@ -5,6 +5,10 @@ const cors = require("cors");
 // Import route files
 const authRoutes = require("./routes/auth");
 const moviesRoutes = require("./routes/movies");
+const favoritesRoutes = require("./routes/favorites");
+
+// Import middleware
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -35,25 +39,17 @@ app.get("/health", (req, res) => {
 // Mount route files
 app.use("/auth", authRoutes);
 app.use("/movies", moviesRoutes);
-
-// TODO: Favorites routes will be mounted here
-// app.use("/favorites", favoritesRoutes);
+app.use("/favorites", favoritesRoutes);
 
 // ==================== ERROR HANDLING ====================
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ error: "Route not found" });
+  res.status(404).json({ success: false, error: "Route not found" });
 });
 
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error("Error:", err);
-  res.status(err.status || 500).json({
-    error: err.message || "Internal server error",
-    timestamp: new Date(),
-  });
-});
+// Global error handler (must be last)
+app.use(errorHandler);
 
 // ==================== SERVER START ====================
 
