@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 *.log
 npm-debug.log*
+
+# ignore data/ directory if it exists
+data/
